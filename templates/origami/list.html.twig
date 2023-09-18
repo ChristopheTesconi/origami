@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block listActive %}active{% endblock %}
+
+{% block title %}Tous mes Origamis{% endblock %}
+
+{% block body %}
+{# <h1 class="text-center mt-3">Les Origamis de Stéphane</h1> #}
+
+
+<div class="container-xl bg-light p-5 border-top">
+{% for origami in origamis %}
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
+            <div class="col-2 movie__poster">
+                <img src="{{ origami.picture }}" class="img-fluid">
+            </div>
+            <div class="col-8 p-4 d-flex flex-column position-static">
+        
+                <h3 class="mb-1">{{ origami.name }}</h3>
+                <div class="mb-1 mt-2">{{ origami.description }}</div>
+
+                <a href="#" class="mt-4 text-danger align-self-start">Voir plus</a>
+                      
+            </div>
+        </div>
+        {% endfor %}
+</div>
+
+{% endblock %}
