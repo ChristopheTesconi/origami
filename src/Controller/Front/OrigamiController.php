@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Repository\OrigamiRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +12,7 @@ class OrigamiController extends AbstractController
     #[Route('/origami', name: 'app_origami')]
     public function list(OrigamiRepository $origamiRepository): Response
     {
-        return $this->render('origami/list.html.twig', [
+        return $this->render('front/origami/list.html.twig', [
             'origamis' => $origamiRepository->findAll()
         ]);
     }

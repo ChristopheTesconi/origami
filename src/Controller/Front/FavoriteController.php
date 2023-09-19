@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ class FavoriteController extends AbstractController
     #[Route('/favorite', name: 'app_favorite')]
     public function index(): Response
     {
-        return $this->render('favorite/index.html.twig', [
+        return $this->render('front/favorite/index.html.twig', [
             'controller_name' => 'FavoriteController',
         ]);
     }
