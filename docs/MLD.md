@@ -38,8 +38,20 @@
 | Champ ||
 |--|--|
 | id | INT AUTO_INCREMENT PRIMARY KEY |
-| origami_id |	INT |
+| origami_id | INT |
 | titre | VARCHAR(100) NOT NULL |
 | lien_url | VARCHAR(255) |
-| Contrainte de clé étrangère | |	
+| Contrainte de clé étrangère ||
 | FOREIGN KEY (origami_id) | REFERENCES origamis(id) |
+
+4. Table favoris :
+
+| Champ ||
+|--|--|
+| id | INT AUTO_INCREMENT PRIMARY KEY |
+| utilisateur_id | INT |
+| origami_id | INT |
+| date_favori | DATETIME DEFAULT CURRENT_TIMESTAMP
+| Contraintes de clé étrangère ||
+| FOREIGN KEY (utilisateur_id) | REFERENCES utilisateurs(id) |
+| FOREIGN KEY (origami_id) | REFERENCES origamis(id) |
