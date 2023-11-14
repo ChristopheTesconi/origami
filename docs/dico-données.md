@@ -52,7 +52,7 @@ Contient la liste des vidéos et leurs caractéristiques.
 
 ## Favoris (table `favorites`)
 
-Contient la liste des favoris et leurs caractéristiques.
+Table de liaison entre les favoris et les utilisateurs. 
 
 | Nom | Type | Description |
 | --- | --- | --- |
