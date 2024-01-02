@@ -5,26 +5,34 @@
 {% block title %}Mes Origamis{% endblock %}
 
 {% block body %}
-<h1 class="text-center mt-2">Les Origamis de Stéphane</h1>
-<div class="container-xl bg-light p-5 border-top">
+	<h1 class="text-center mt-2">Les Origamis de Stéphane</h1>
 
+		<section class="slider">
+			<button class="btn slider__btn" type="button" aria-label="Précédent">&lt;</button>
+			<button class="btn slider__btn" type="button" aria-label="Suivant">&gt;</button>
+		</section>
+
+<script src={{asset("js/slider.js")}}></script>
+
+{% endblock %}
+
+{# <div class="container-xl bg-light p-5 border-top">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
-            <div class="col-4 movie__poster">
+            <div class="col-5 movie__poster">
                 <img src="image/dragon1.png" class="img-fluid">
             </div>
             <div class="col-8 p-4 d-flex flex-column position-static">
-        
                 <strong class="d-inline-block mb-2 text-primary"></strong>
                 <h3 class="mb-1">Le Dragon</h3>
                 <div class="mb-1 text-muted"></div>
                 <p><small></small>
                 </p>
                 <div class="d-flex" style="color: orange;">
-                    {# <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i> #}
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i> 
                     <span class="ps-1"></span>
                 </div>
                 <a href="#" class="mt-4 text-danger align-self-start">
@@ -32,7 +40,4 @@
                 </a>
             </div>
         </div>
-    
-</div>  
-
-{% endblock %} 
+</div>   #}
