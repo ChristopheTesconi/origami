@@ -17,4 +17,3 @@
 - Rendre la barre de menu plus responsive en mode mobile
 - Afficher de façon random les photos du slider (ou pas...)
 - 
-
