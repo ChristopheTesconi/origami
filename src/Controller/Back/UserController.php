@@ -53,22 +53,61 @@ class UserController extends AbstractController
             ]);
         }
 
-    //UPDATE
-        #[Route('/back/user/{id}', name: 'app_back_user_update')]
-        public function update(int $id): Response
-        {
-            return $this->render('back/user/update.html.twig', [
-                'id' => $id
-            ]);
-        }
+  // UPDATE (cont.)
+#[Route('/back/user/{id}/edit', name: 'app_back_user_edit')]
+public function edit(int $id, Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository): Response
+{
+    $user = $userRepository->find($id);
 
-    //DELETE
-        #[Route('/back/user/{id}', name: 'app_back_user_delete')]
-        public function delete(int $id): Response
-        {
-            return $this->render('back/user/delete.html.twig', [
-                'id' => $id
-            ]);
-        }
+    if (!$user) {
+        throw $this->createNotFoundException('Utilisateur non trouvé');
+    }
+
+    $form = $this->createForm(BackUserType::class, $user, ['disable_password' => true]);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Utilisateur mis à jour avec succès.');
+
+        return $this->redirectToRoute('app_back_user');
+    }
+
+    return $this->render('back/user/edit.html.twig', [
+        'form' => $form->createView(),
+        'user' => $user,
+    ]);
+}
+
+
+// DELETE
+#[Route('/back/user/{id}/delete', name: 'app_back_user_delete')]
+public function delete(int $id, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+{
+    $user = $userRepository->find($id);
+
+    if (!$user) {
+        throw $this->createNotFoundException('Utilisateur non trouvé');
+    }
+
+    $entityManager->remove($user);
+    $entityManager->flush();
+
+    $this->addFlash('success', 'Utilisateur supprimé avec succès.');
+
+    return $this->redirectToRoute('app_back_user');
+
+}
+
+    //SHOW
+    #[Route('/back/{id}/user', name: 'app_back_user_show')]
+    public function show(User $user): Response
+    {
+        return $this->render('back/user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
 
 }

@@ -53,6 +53,10 @@
   font-weight: bold;
 }
 
+.purple-text th, h1 {
+  color: purple;
+}
+
 /* responsive */
 @media screen and (min-width: 40em) {
   .header__flex {

@@ -26,8 +26,9 @@ class BackUserType extends AbstractType
             ],
             "multiple" => true,
             "expanded" => true
-        ])
-        ->add('plainPassword', PasswordType::class, [
+        ]);
+        if (!$options['disable_password']) { 
+        $builder->add('plainPassword', PasswordType::class, [
                 'label' => 'Votre mot de passe',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -44,14 +45,15 @@ class BackUserType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-        ;
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'disable_password' => false,
         ]);
     }
 }
