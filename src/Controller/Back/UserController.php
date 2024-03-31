@@ -53,7 +53,7 @@ class UserController extends AbstractController
             ]);
         }
 
-  // UPDATE (cont.)
+// UPDATE (cont.)
 #[Route('/back/user/{id}/edit', name: 'app_back_user_edit')]
 public function edit(int $id, Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository): Response
 {

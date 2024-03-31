@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Origami;
 use App\Repository\OrigamiRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,20 +12,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class OrigamiController extends AbstractController
 {   
-    //READ
-    #[Route('/api/origami', name: 'app_api_origami', methods: ['GET'])]
-    public function getOrigamis(OrigamiRepository $origamiRepository): JsonResponse
+    //SHOW
+    #[Route('/api/{id}/origami', name: 'app_api_origami_show', methods: ['GET'])]
+    public function getOrigamiByID(Origami $origami): JsonResponse
     {
-        // on récupère les origamis en bdd
-        $origamis = $origamiRepository->findAll();
-        
         return $this->json([
-            $origamis, Response::HTTP_OK, []
+            $origami, Response::HTTP_OK, []
         ]);
     }
 
     //CREATE
-    #[Route('/api/ajouter/origami', name: 'app_api_origami', methods: ['POST'])]
+    #[Route('/api/ajouter/origami', name: 'app_api_origami_create', methods: ['POST'])]
     public function postOrigamis(OrigamiRepository $origamiRepository): JsonResponse
     {
         // on récupère les origamis en bdd
@@ -35,8 +33,20 @@ class OrigamiController extends AbstractController
         ]);
     }
 
+    //READ
+    #[Route('/api/origami', name: 'app_api_origami', methods: ['GET'], format: 'json')]
+    public function getOrigamis(OrigamiRepository $origamiRepository): JsonResponse
+    {
+        // on récupère les origamis en bdd
+        $origamis = $origamiRepository->findAll();
+        
+        return $this->json([
+            $origamis, Response::HTTP_OK, []
+        ]);
+    }
+
     //UPDATE
-    #[Route('/api/modifier/origami', name: 'app_api_origami', methods: ['PATCH'])]
+    #[Route('/api/modifier/origami', name: 'app_api_origami_update', methods: ['PATCH'])]
     public function editOrigamis(OrigamiRepository $origamiRepository): JsonResponse
     {
         // on récupère les origamis en bdd

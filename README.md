@@ -16,4 +16,7 @@
 - Voir pour faire des fragments : nav, footer, ...
 - Rendre la barre de menu plus responsive en mode mobile
 - Afficher de façon random les photos du slider (ou pas...)
+- CRUD Commentaires pour les origami
+- Fenêtr, message flash qui dit qu'on est bien inscrit
+- Je ne veux pas qu'on puisse rentrer 2 origamis identique en BDD
 - 

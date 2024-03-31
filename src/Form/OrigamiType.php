@@ -18,13 +18,19 @@ class OrigamiType extends AbstractType
             ->add('name', TextType::class,[
                 "label" => "Nom de L'origami"
             ])
-            ->add('picture')
-            ->add('createdAt', DateType::class,[
-                "label" => "Date de création de l'origami"
+            ->add('picture', TextType::class,[
+                "label" => "Image de l'origami"
             ])
-            ->add('updatedAt', DateType::class,[
-                "label" => "Date de mise à jour de l'origami"
-            ])
+            // ->add('createdAt', DateType::class,[
+            //     "label" => "Date de création de l'origami",
+            //     'data_class' => null, // Permet d'accepter les objets DateTimeImmutable
+            //     'input' => 'datetime_immutable', // Spécifiez l'input type
+            // ])
+            // ->add('updatedAt', DateType::class,[
+            //     "label" => "Date de mise à jour de l'origami",
+            //     'data_class' => null, // Permet d'accepter les objets DateTimeImmutable
+            //     'input' => 'datetime_immutable', // Spécifiez l'input type
+            // ])
             ->add('description', TextareaType::class,[
                 "label" => "Description de l'origami"
             ])
