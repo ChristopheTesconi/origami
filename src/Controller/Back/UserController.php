@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\BackUserType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use App\Repository\OrigamiRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +54,7 @@ class UserController extends AbstractController
             ]);
         }
 
-// UPDATE (cont.)
+// UPDATE
 #[Route('/back/user/{id}/edit', name: 'app_back_user_edit')]
 public function edit(int $id, Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository): Response
 {
@@ -92,10 +93,16 @@ public function delete(int $id, EntityManagerInterface $entityManager, UserRepos
         throw $this->createNotFoundException('Utilisateur non trouvé');
     }
 
+
+    // Récupérer et supprimer les origamis de l'utilisateur
+    foreach ($user->getOrigamis() as $origami) {
+        $entityManager->remove($origami);
+    }
+
     $entityManager->remove($user);
     $entityManager->flush();
 
-    $this->addFlash('success', 'Utilisateur supprimé avec succès.');
+    $this->addFlash('success', 'Utilisateur et ses origamis supprimé avec succès.');
 
     return $this->redirectToRoute('app_back_user');
 
@@ -103,10 +110,14 @@ public function delete(int $id, EntityManagerInterface $entityManager, UserRepos
 
     //SHOW
     #[Route('/back/{id}/user', name: 'app_back_user_show')]
-    public function show(User $user): Response
+    public function show(User $user, OrigamiRepository $origamiRepository): Response
     {
+        // Récupérer les origamis associés à l'utilisateur
+        $origamis = $origamiRepository->findBy(['user' => $user]);
+    
         return $this->render('back/user/show.html.twig', [
             'user' => $user,
+            'origamis' => $origamis, // Ajoutez cette ligne
         ]);
     }
 

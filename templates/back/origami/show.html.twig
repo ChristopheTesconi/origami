@@ -23,7 +23,7 @@
         <div class="col-8 p-4 d-flex flex-column position-static">
             <h3 class="mb-1">{{ origami.name }}</h3>
             <div class="mb-1 mt-2">{{ origami.description }}</div>
-
+            <div class="mb-1 mt-2" style="color: purple;">Origami de {{ origami.user.getUserName() }}</div>
             <p>Date de création : {{ origami.createdAt|date('d/m/Y') }}</p>
             <p>Date de mise à jour : {{ origami.updatedAt ? origami.updatedAt|date('d/m/Y') : 'Non mis à jour' }}</p>
 

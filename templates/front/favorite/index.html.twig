@@ -38,8 +38,18 @@
                 <div class="col-8 p-4 d-flex flex-column position-static">
                     <h3 class="mb-1">{{ origami.name }}</h3>
                     <div class="mb-1 mt-2">{{ origami.description }}</div>
+                    <div class="mb-1 mt-2" style="color: purple;">Origami de {{ origami.user.getUserName() }}</div>
                     <a href="{{ path('app_show_origami', {id: origami.id}) }}" class="mt-4 text-danger align-self-start">Voir plus</a>
+                                <div class="mt-4 d-flex">
+                <a href="{{ path('app_edit_origami', {id: origami.id}) }}" class="btn btn-success me-2">Modifier</a>
+
+                <form method="post" action="{{ path('app_delete_origami', {id: origami.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cet origami ?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
                 </div>
+                
             </div>
         {% endfor %}
     {% else %}

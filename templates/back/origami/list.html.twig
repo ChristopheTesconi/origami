@@ -28,10 +28,11 @@
         
                 <h3 class="mb-1">{{ origami.name }}</h3>
                 <div class="mb-1 mt-2">{{ origami.description }}</div>
-
+                <div class="mb-1 mt-2" style="color: purple;">Origami de {{ origami.user.getUserName() }}</div>
                 <a href="{{ path('app_back_show_origami'{id: origami.id }) }}" class="mt-4 text-danger align-self-start">Voir plus</a>
                       
             </div>
+            
         </div>
         {% endfor %}
 </div>

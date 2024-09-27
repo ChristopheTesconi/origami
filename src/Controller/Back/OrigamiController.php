@@ -59,7 +59,7 @@ public function newOrigami(Request $request, EntityManagerInterface $entityManag
         $entityManager->flush();
 
         $this->addFlash('success', 'L\'origami a bien été ajouté');
-        return $this->redirectToRoute('app_favorite');
+        return $this->redirectToRoute('app_back_origami');
     }
 
     return $this->render('back/origami/new.html.twig', [
@@ -120,7 +120,7 @@ public function editOrigami(
 
         $entityManager->flush();
         $this->addFlash('success', 'L\'origami a bien été modifié');
-        return $this->redirectToRoute('app_favorite');
+        return $this->redirectToRoute('app_back_origami');
     }
 
     return $this->render('back/origami/update.html.twig', [
@@ -161,7 +161,7 @@ public function editOrigami(
     $entityManager->flush();
 
     $this->addFlash('success', 'L\'origami a bien été supprimé');
-    return $this->redirectToRoute('app_favorite');
+    return $this->redirectToRoute('app_back_origami');
     }
 
     //SHOW
