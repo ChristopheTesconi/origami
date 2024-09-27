@@ -23,7 +23,8 @@ class AboutType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => About::class,
-            'csrf_protection' => true
+            'csrf_protection' => true,
+            'sanitize_html' => true
         ]);
     }
 }

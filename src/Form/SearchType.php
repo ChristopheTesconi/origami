@@ -23,7 +23,8 @@ class SearchType extends AbstractType
         $resolver->setDefaults([
             'method' => 'GET',
             'data_class' => Origami::class,
-            'csrf_protection' => true
+            'csrf_protection' => true,
+            'sanitize_html' => true
         ]);
     }
 }

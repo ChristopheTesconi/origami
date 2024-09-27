@@ -20,7 +20,7 @@ class OrigamiType extends AbstractType
                 "label" => "Nom de l'origami"
             ])
             ->add('pictures', DropzoneType::class,[
-                'label' => 'Photos de l\'origami, 2 MB max (jusqu\'à 3 images)',
+                'label' => 'Photo de l\'origami, 2 MB max',
                 'mapped' => false,
                 'multiple' => true,
                 'required' => false,
@@ -40,7 +40,8 @@ class OrigamiType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Origami::class,
-            'csrf_protection' => true
+            'csrf_protection' => true,
+            'sanitize_html' => true
         ]);
     }
 }

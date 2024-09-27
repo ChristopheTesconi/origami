@@ -54,7 +54,8 @@ class BackUserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'disable_password' => false,
-            'csrf_protection' => true
+            'csrf_protection' => true,
+            'sanitize_html' => true
         ]);
     }
 }

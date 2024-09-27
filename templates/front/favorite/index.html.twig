@@ -5,6 +5,10 @@
 {% block body %}
 <h1 class="text-center mt-3">Mes Origamis</h1>
 
+    <div class="text-center mt-4">
+        <a href="{{ path('app_new_origami') }}" class="btn btn-success btn-lg">Ajouter un Origami</a>
+    </div>
+
     {% for flashMessage in app.flashes('success') %}
     <div class="alert alert-dismissible alert-success">
         {{ flashMessage }}
