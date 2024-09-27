@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseback.html.twig' %}
 
 {% block title %}Nouvel Origami !{% endblock %}
 
@@ -6,11 +6,19 @@
  <div class="container">
     <h1 class="h3 mb-3 mt-3 font-weight-normal">Nouvel Origami</h1>
 
+        {% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-dismissible alert-success">
+        {{ flashMessage }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+{% endfor %} 
+
+
     {{ form_errors(form) }}
 
     {{ form_start(form) }}
         {{ form_row(form.name) }}
-        {{ form_row(form.picture) }}
+        {{ form_row(form.pictures) }}
         {{ form_row(form.description) }}
         {# {{ form_row(form.createdAt) }}
         {{ form_row(form.updatedAt) }} #}

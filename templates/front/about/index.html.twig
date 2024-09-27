@@ -3,17 +3,12 @@
 {% block aboutActive %}active{% endblock %}
 
 
-{% block title %}Hello AboutController!{% endblock %}
+{% block title %}À Propos{% endblock %}
 
 {% block body %}
-	<h1 class="text-center mt-2">A propos de Stéphane</h1>
+	<h1 class="mt-5 mb-5">À propos de Stéphane</h1>
 
-
-
-			<div class="slider">
-			<button class="btn slider__btn" type="button" aria-label="Précédent">&lt;</button>
-
-			<button class="btn slider__btn" type="button" aria-label="Suivant">&gt;</button>
-
-			</div> 
+    <div>
+        {{ content|raw }}
+    </div>
 {% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Détails de l'Origami{% endblock %}
+
+{% block body %}
+<div class="container-xl bg-light p-5">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
+        <div class="col-2 movie__poster">
+                <!-- Boucle sur les images de l'origami -->
+                {% for picture in origami.pictures %}
+                    {% if picture starts with 'http' %}
+                        <!-- Si c'est une URL absolue -->
+                        <img src="{{ picture }}" class="img-fluid me-2" alt="{{ origami.name }}">
+                    {% else %}
+                        <!-- Sinon, on suppose que c'est une image locale dans le dossier uploads/origamis -->
+                        <a href="{{ path('app_show_origami_picture', {id: origami.id}) }}">
+                            <img src="{{ asset('uploads/origamis/' ~ picture) }}" class="img-fluid me-2" alt="{{ origami.name }}">
+                        </a>
+                    {% endif %}
+                {% endfor %}
+        </div>
+
+        <div class="col-8 p-4 d-flex flex-column position-static">
+            <h3 class="mb-1">{{ origami.name }}</h3>
+            <div class="mb-1 mt-2">{{ origami.description }}</div>
+
+            <p>Date de création : {{ origami.createdAt|date('d/m/Y') }}</p>
+            <p>Date de mise à jour : {{ origami.updatedAt ? origami.updatedAt|date('d/m/Y') : 'Non mis à jour' }}</p>
+
+            <div class="mt-4 d-flex">
+                <a href="{{ path('app_back_edit_origami', {id: origami.id}) }}" class="btn btn-success me-2">Modifier</a>
+
+                <form method="post" action="{{ path('app_back_delete_origami', {id: origami.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cet origami ?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+
+            <a href="{{ path('app_favorite') }}" class="mt-4 text-secondary">Retour à la liste</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

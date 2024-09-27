@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.1/dist/sketchy/bootstrap.min.css" rel="stylesheet">
+		{# <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> #}
+		<!-- Bootstrap icons -->
+		<link
+		rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> <!-- Mon css -->
+		<link rel="stylesheet" href={{asset("css/style.css")}}>
+		<title>ª
+			{% block title %}Mes Origamis{% endblock %}
+		</title>
+	</head>
+	<body>
+
+		<!-- Nav -->
+		<nav class="navbar navbar-expand-lg custom-navbar fixed-top" data-bs-theme="dark"> 
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{path('app_back_origami')}}">Origamis</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav  me-auto justify-content-around w-50">
+						<li class="nav-item">
+							{# <a class="nav-link {% block Active %}{% endblock %}" href="{{path('app_back_origami')}}">Accueil
+								<span class="visually-hidden">(current)</span>
+							</a> #}
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% block listActive %}{% endblock %}" href="{{path('app_back_origami')}}">Liste des Origamis</a>
+						</li>
+						{# <li class="nav-item">
+						          <a class="nav-link {% block favoriteActive %}{% endblock %}" href="{{path('app_favorite')}}">Mes Favoris</a>
+						        </li> #}
+						{# <li class="nav-item">
+							<a class="nav-link {% block aboutActive %}{% endblock %}" href="{{path('app_back_user')}}">Liste des utilisateurs</a>
+						</li> #}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des utilisateurs</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{path('app_back_user')}}">Liste des Utilisateurs</a>
+								<a class="dropdown-item" href="{{path('app_back_new_user')}}">Nouvel Utilisateur</a>
+								{# <a class="dropdown-item" href="#">Something else here</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Separated link</a>
+							</div> #}
+						</li>
+												<li class="nav-item">
+							<a class="nav-link {% block AboutActive %}{% endblock %}" href="{{path('app_back_about_edit')}}">Mon À Propos</a>
+						</li>
+					</ul>
+					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+						<form class="d-flex">
+							<li class="nav-link m-2 dropdown">
+								<a class="nav-item dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{app.user.username}}</a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">Mon profil</a>
+									<a class="dropdown-item" href="{{path('app_favorite')}}">Mes Origamis</a>
+									<a class="dropdown-item" href="#">Mon panier</a>
+									{% if is_granted('ROLE_ADMIN') %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('app_origami') }}">USER</a>
+                            {% endif %}
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
+								</div>
+							</li>
+							{# <a class="nav-item mt-2 m-2" href="{{path('app_logout')}}">{{app.user.username}}</a>  #}
+							{# <a class="nav-item mt-2 m-2" href="{{path('app_logout')}}">Déconnexion</a> #}
+						{% else %}
+							<form class="d-flex">
+								<a class="nav-item mt-2 text-light" href="{{path('app_register')}}">Inscription</a>
+								<a class="nav-item mt-2 m-2 text-light" href="{{path('app_login')}}">Connexion</a>
+							{% endif %}
+							<input class="form-control me-sm-2" type="search" placeholder="Rechercher...">
+							<button class="btn btn-secondary my-2 my-sm-0" type="submit">
+								<i class="bi bi-search"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+			</nav>
+
+			<main class="container pt-5">
+				{% block body %}{% endblock %}
+			</main>
+
+			<footer>
+
+				<nav class="navbar fixed-bottom bg-body-tertiary">
+					<div class="container-fluid">
+						<ul class="nav justify-content-center w-100">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="https://www.instagram.com/lechinoisdufbi/">
+									<i class="bi bi-instagram"></i>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									<i class="bi bi-facebook"></i>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+									<i class="bi bi-linkedin"></i>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+				</nav>
+
+			</footer>
+			
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></>
+		</body>
+	</body>
+</html>

@@ -17,7 +17,7 @@ class MainController extends AbstractController
         $origamis = $origamiRepository->findAll();
         $origamiPictures = [];
         foreach ($origamis as $origami) {
-            $origamiPictures[] = $origami->getPicture();
+            $origamiPictures[] = $origami->getPictures();
         }
          // Si la requête demande du JSON, retournez une JsonResponse
          if ($request->headers->get('Accept') === 'application/json') {

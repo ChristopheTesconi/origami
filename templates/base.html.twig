@@ -19,7 +19,7 @@
 	<body>
 
 		<!-- Nav -->
-		<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+		<nav class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{path('app_main')}}">Origamis</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link {% block listActive %}{% endblock %}" href="{{path('app_origami')}}">Liste des Origamis</a>
+							<a class="nav-link {% block listActive %}{% endblock %}" href="{{path('app_origami')}}">Liste de tous les Origamis</a>
 						</li>
 						{# <li class="nav-item">
 						          <a class="nav-link {% block favoriteActive %}{% endblock %}" href="{{path('app_favorite')}}">Mes Favoris</a>
@@ -44,22 +44,24 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">En savoir plus</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Vidéos</a>
-								<a class="dropdown-item" href="#">Comment faire un Origamis</a>
-								<a class="dropdown-item" href="#">Something else here</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Separated link</a>
+								<a class="dropdown-item" href="#">Vidéos (à venir)</a>
+								<a class="dropdown-item" href="#">Comment faire un Origamis (à venir)</a>
 							</div>
 						</li>
 					</ul>
-					{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 						<form class="d-flex">
 							<li class="nav-link m-2 dropdown">
 								<a class="nav-item dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{app.user.username}}</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">Mon profil</a>
-									<a class="dropdown-item" href="{{path('app_favorite')}}">Mes favoris</a>
-									<a class="dropdown-item" href="#">Mon panier</a>
+									<a class="dropdown-item" href="{{ path('app_front_user_show', {'id': app.user.id}) }}">Mon profil</a>
+									<a class="dropdown-item" href="{{path('app_favorite')}}">Mes Origamis</a>
+									<a class="dropdown-item" href="{{path('app_new_origami')}}">Nouvel Origami</a>
+									{% if is_granted('ROLE_ADMIN') %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('app_back_origami') }}">ADMIN</a>
+                            {% endif %}
+
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="{{path('app_logout')}}">Déconnexion</a>
 								</div>
@@ -67,20 +69,24 @@
 							{# <a class="nav-item mt-2 m-2" href="{{path('app_logout')}}">{{app.user.username}}</a>  #}
 							{# <a class="nav-item mt-2 m-2" href="{{path('app_logout')}}">Déconnexion</a> #}
 						{% else %}
-							<form class="d-flex">
+						<form class="d-flex">
 								<a class="nav-item mt-2 text-light" href="{{path('app_register')}}">Inscription</a>
 								<a class="nav-item mt-2 m-2 text-light" href="{{path('app_login')}}">Connexion</a>
 							{% endif %}
-							<input class="form-control me-sm-2" type="search" placeholder="Rechercher...">
-							<button class="btn btn-secondary my-2 my-sm-0" type="submit">
-								<i class="bi bi-search"></i>
-							</button>
+
+							<form class="d-flex" action="{{ path('app_search') }}" method="GET">
+    						<input class="form-control me-sm-2" type="search" name="q" placeholder="Rechercher...">
+    						<button class="btn btn-secondary my-2 my-sm-0" type="submit">
+        					<i class="bi bi-search"></i>
+    						</button>
+							</form>
+
 						</form>
 					</div>
 				</div>
 			</nav>
 
-			<main class="container">
+			<main class="container pt-5">
 				{% block body %}{% endblock %}
 			</main>
 

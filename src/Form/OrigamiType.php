@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Origami;
 use Symfony\Component\Form\AbstractType;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -16,21 +17,19 @@ class OrigamiType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,[
-                "label" => "Nom de L'origami"
+                "label" => "Nom de l'origami"
             ])
-            ->add('picture', TextType::class,[
-                "label" => "Image de l'origami"
+            ->add('pictures', DropzoneType::class,[
+                'label' => 'Photos de l\'origami, 2 MB max (jusqu\'à 3 images)',
+                'mapped' => false,
+                'multiple' => true,
+                'required' => false,
+                'attr' => [
+                    'accept' => 'image/*',  // Pour accepter uniquement les images
+                    'multiple' => 'multiple',
+                    'max' => 3               // Limite à 3 fichiers
+                ],
             ])
-            // ->add('createdAt', DateType::class,[
-            //     "label" => "Date de création de l'origami",
-            //     'data_class' => null, // Permet d'accepter les objets DateTimeImmutable
-            //     'input' => 'datetime_immutable', // Spécifiez l'input type
-            // ])
-            // ->add('updatedAt', DateType::class,[
-            //     "label" => "Date de mise à jour de l'origami",
-            //     'data_class' => null, // Permet d'accepter les objets DateTimeImmutable
-            //     'input' => 'datetime_immutable', // Spécifiez l'input type
-            // ])
             ->add('description', TextareaType::class,[
                 "label" => "Description de l'origami"
             ])
@@ -41,6 +40,7 @@ class OrigamiType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Origami::class,
+            'csrf_protection' => true
         ]);
     }
 }

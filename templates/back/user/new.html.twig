@@ -1,10 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseback.html.twig' %}
 
 {% block title %}Nouvel Utilisateur !{% endblock %}
 
 {% block body %}
  <div class="container">
     <h1 class="h3 mb-3 mt-3 font-weight-normal">Nouvel utilisateur</h1>
+
+        {% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-dismissible alert-success">
+        {{ flashMessage }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+{% endfor %} 
+
 
     {{ form_errors(form) }}
 
