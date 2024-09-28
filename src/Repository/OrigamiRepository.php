@@ -21,6 +21,15 @@ class OrigamiRepository extends ServiceEntityRepository
         parent::__construct($registry, Origami::class);
     }
 
+    public function searchByQuery(string $query)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.name LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Origami[] Returns an array of Origami objects
 //     */

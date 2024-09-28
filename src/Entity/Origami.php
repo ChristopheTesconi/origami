@@ -17,8 +17,8 @@ class Origami
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $pictures = [];
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
@@ -28,6 +28,9 @@ class Origami
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'origamis')]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -46,15 +49,15 @@ class Origami
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getPictures(): array
     {
-        return $this->picture;
+        return $this->pictures;
     }
-
-    public function setPicture(?string $picture): static
+    
+    public function setPictures(array $pictures): static
     {
-        $this->picture = $picture;
-
+        $this->pictures = $pictures;
+    
         return $this;
     }
 
@@ -93,4 +96,17 @@ class Origami
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }

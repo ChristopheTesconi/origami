@@ -35,22 +35,40 @@
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   padding: 2rem;
-  /* box-sizing: border-box;  */
-  /* border: 2px solid #000000; */
-  /* box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); */
+  /* border: 4px solid royalblue; */
 }
 
 .slider__img--current {
   opacity: 1;
   z-index: 1;
+  /* border: royalblue; */
 }
 
 .slider__btn {
   position: relative;
   z-index: 2;
   font-weight: bold;
+}
+
+.purple-text th,
+h1 {
+  color: purple;
+}
+
+.custom-navbar {
+  background-color: purple;
+}
+
+main {
+  padding-bottom: 80px; /* Ajuste cette valeur pour éviter le chevauchement */
+}
+
+.img-fluid {
+  width: 100%; /* S'assure que l'image occupe toute la largeur du conteneur */
+  height: 100%; /* Garde les proportions de l'image */
+  object-fit: cover; /* Recouvre le conteneur sans déformer l'image */
 }
 
 /* responsive */

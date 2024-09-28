@@ -1,0 +1,33 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Nouvel Utilisateur !{% endblock %}
+
+{% block body %}
+ <div class="container">
+    <h1 class="h3 mb-3 mt-3 font-weight-normal">Nouvel utilisateur</h1>
+
+        {% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-dismissible alert-success">
+        {{ flashMessage }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+{% endfor %} 
+
+
+    {{ form_errors(form) }}
+
+    {{ form_start(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword, {
+            label: 'Votre mot de passe'
+        }) }}
+        {{ form_row(form.roles) }}
+        <button class="btn btn-lg btn-primary mt-3" type="submit" class="btn">Inscription</button>
+    {{ form_end(form) }}
+      
+
+    </div>
+
+        <a href="{{ path('app_back_user') }}">Retour à la liste des utilisateurs</a>
+{% endblock %}

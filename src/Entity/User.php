@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Origami::class)]
+    private Collection $origamis;
+
+    public function __construct()
+    {
+        $this->origamis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,4 +138,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Origami>
+     */
+    public function getOrigamis(): Collection
+    {
+        return $this->origamis;
+    }
+
+    public function addOrigami(Origami $origami): static
+    {
+        if (!$this->origamis->contains($origami)) {
+            $this->origamis->add($origami);
+            $origami->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrigami(Origami $origami): static
+    {
+        if ($this->origamis->removeElement($origami)) {
+            // set the owning side to null (unless already changed)
+            if ($origami->getUser() === $this) {
+                $origami->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
